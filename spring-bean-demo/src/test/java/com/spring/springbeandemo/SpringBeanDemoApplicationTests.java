@@ -1,9 +1,12 @@
 package com.spring.springbeandemo;
 
+import com.spring.springbeandemo.anno.CDConfig;
+import com.spring.springbeandemo.anno.Play;
 import com.spring.springbeandemo.bean.Person;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 @SpringBootTest
@@ -24,6 +27,13 @@ public class SpringBeanDemoApplicationTests {
 
         System.out.println("现在开始关闭容器！");
         ((ClassPathXmlApplicationContext)factory).registerShutdownHook();
+    }
+
+    @Test
+    public void annotationTest(){
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(CDConfig.class);
+        Play play = (Play) context.getBean("play");
+        play.play();
     }
 
 }
